@@ -100,9 +100,9 @@
     const updateControls = () => {
       const totalPages = pdfDoc?.numPages || 0;
       const singleMode = useSingleView();
-      const maxLeftPage = Math.max(0, totalPages - 1);
+      const lastLeftPage = totalPages % 2 === 0 ? totalPages : Math.max(0, totalPages - 1);
       const atStart = singleMode ? currentPage <= 1 : currentPage <= 0;
-      const atEnd = singleMode ? currentPage >= totalPages : currentPage >= maxLeftPage;
+      const atEnd = singleMode ? currentPage >= totalPages : currentPage >= lastLeftPage;
 
       prevBtn.disabled = atStart;
       nextBtn.disabled = atEnd;
@@ -115,8 +115,7 @@
       if (singleMode) {
         statusEl.textContent = `Page ${Math.max(1, currentPage)} of ${totalPages}`;
       } else {
-        const rightPage = Math.min(currentPage + 1, totalPages);
-        statusEl.textContent = `Pages ${currentPage}-${rightPage} of ${totalPages}`;
+        statusEl.textContent = `Pages ${currentPage}-${currentPage + 1}`;
       }
     };
 
@@ -146,10 +145,14 @@
           if (token !== renderToken) return;
           renderBlank(leftCanvas, rightSize.width, rightSize.height);
         } else {
-          await renderPage(leftPageNumber, leftCanvas, leftCtx, pageWidth);
+          const leftSize = await renderPage(leftPageNumber, leftCanvas, leftCtx, pageWidth);
           if (token !== renderToken) return;
-          await renderPage(rightPageNumber, rightCanvas, rightCtx, pageWidth);
-          if (token !== renderToken) return;
+          if (rightPageNumber <= pdfDoc.numPages) {
+            await renderPage(rightPageNumber, rightCanvas, rightCtx, pageWidth);
+            if (token !== renderToken) return;
+          } else {
+            renderBlank(rightCanvas, leftSize.width, leftSize.height);
+          }
         }
       }
 
@@ -163,19 +166,23 @@
       if (useSingleView()) {
         currentPage = Math.max(1, Math.min(currentPage, totalPages));
       } else {
-        currentPage = Math.max(0, Math.min(currentPage, Math.max(0, totalPages - 1)));
+        const lastLeftPage = totalPages % 2 === 0 ? totalPages : Math.max(0, totalPages - 1);
+        currentPage = Math.max(0, Math.min(currentPage, lastLeftPage));
+        if (currentPage % 2 !== 0) {
+          currentPage -= 1;
+        }
       }
     };
 
     prevBtn.addEventListener("click", () => {
-      const step = useSingleView() ? 1 : 1;
+      const step = useSingleView() ? 1 : 2;
       currentPage = currentPage - step;
       clampPage();
       renderSpread();
     });
 
     nextBtn.addEventListener("click", () => {
-      const step = useSingleView() ? 1 : 1;
+      const step = useSingleView() ? 1 : 2;
       currentPage = currentPage + step;
       clampPage();
       renderSpread();
