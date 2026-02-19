@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nikhil Narendiran | Architect</title>
+  <meta name="description" content="Architect portfolio featuring selected works and a downloadable PDF portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav reveal">
+        <div class="logo">Nikhil Narendiran</div>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#works">Works</a>
+            <a href="#approach">Approach</a>
+            <a href="#portfolio">Portfolio PDF</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+            <span class="theme-toggle-label">Dark Mode</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div class="hero-text reveal delay-1">
+          <p class="eyebrow">Architect</p>
+          <h1>Spaces with calm, clarity, and structural poetry.</h1>
+          <p class="subhead">
+            An architect focused on contemporary residential, cultural, and adaptive reuse projects that
+            balance light, material honesty, and human scale.
+          </p>
+          <div class="cta">
+            <a class="button primary" href="#portfolio">View Portfolio PDF</a>
+            <a class="button ghost" href="Nikhil-Narendiran-Portfolio.pdf" target="_blank" rel="noopener">Open PDF</a>
+          </div>
+        </div>
+        <div class="hero-card reveal delay-2">
+          <p class="card-title">Capabilities</p>
+          <ul class="capabilities">
+            <li>Architectural design</li>
+            <li>Feasibility + planning</li>
+            <li>Concept-to-construction coordination</li>
+            <li>Interior + material strategies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="works" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Selected Works</h2>
+          <p>Concept studies and built work emphasizing restrained palettes and expressive structure.</p>
+        </div>
+        <div class="card-grid">
+          <article class="project-card reveal delay-1">
+            <h3>Hearth Courtyard House</h3>
+            <p>Layered thresholds and a central courtyard to modulate daylight and privacy.</p>
+            <span class="tag">Residential</span>
+          </article>
+          <article class="project-card reveal delay-2">
+            <h3>Riverline Gallery</h3>
+            <p>Timber ribs and soft skylight rhythm shaping a quiet civic experience.</p>
+            <span class="tag">Cultural</span>
+          </article>
+          <article class="project-card reveal delay-3">
+            <h3>Foundry Loft Reuse</h3>
+            <p>Adaptive reuse that preserves industrial character while introducing warmth.</p>
+            <span class="tag">Adaptive Reuse</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="section alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Approach</h2>
+          <p>Design decisions are guided by light, craft, and structural legibility.</p>
+        </div>
+        <div class="approach-grid">
+          <div class="approach-card reveal delay-1">
+            <h3>Light as Structure</h3>
+            <p>Daylight is treated as a material to reveal form, texture, and sequence.</p>
+          </div>
+          <div class="approach-card reveal delay-2">
+            <h3>Material Honesty</h3>
+            <p>Palette choices prioritize longevity, low embodied energy, and tactile warmth.</p>
+          </div>
+          <div class="approach-card reveal delay-3">
+            <h3>Human Rhythm</h3>
+            <p>Proportions and movement are tuned to calm, legible spatial narratives.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Portfolio PDF</h2>
+          <p>Browse the full portfolio directly on this page or open the PDF in a new tab.</p>
+        </div>
+        <div class="pdf-wrap reveal">
+          <iframe
+            class="pdf-frame"
+            src="Nikhil-Narendiran-Portfolio.pdf#view=FitH"
+            title="Nikhil Narendiran Portfolio PDF"
+          >
+            <p>
+              Your browser does not support embedded PDFs.
+              <a href="Nikhil-Narendiran-Portfolio.pdf">Download the portfolio</a> instead.
+            </p>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Contact</h2>
+          <p>Available for select commissions and collaborations.</p>
+        </div>
+        <div class="contact-card reveal">
+          <p class="contact-line">Email: <a href="mailto:hello@studio.com">hello@studio.com</a></p>
+          <p class="contact-note">Replace with your studio email and phone number.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Nikhil Narendiran Architecture. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggleButton = document.getElementById("theme-toggle");
+    const label = toggleButton?.querySelector(".theme-toggle-label");
+
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      if (toggleButton) {
+        const isDark = theme === "dark";
+        toggleButton.setAttribute("aria-pressed", String(isDark));
+        if (label) {
+          label.textContent = isDark ? "Light Mode" : "Dark Mode";
+        }
+      }
+    };
+
+    if (toggleButton) {
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
+      applyTheme(initialTheme);
+
+      toggleButton.addEventListener("click", () => {
+        const nextTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(nextTheme);
+        localStorage.setItem("theme", nextTheme);
+      });
+    }
+  </script>
+</body>
+</html>
