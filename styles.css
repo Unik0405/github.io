@@ -1,14 +1,12 @@
 ﻿:root {
-  --bg: #1a1612;
-  --bg-elevated: #241f1a;
-  --page: #fdfaf4;
-  --ink: #f6efe6;
-  --muted: #c8b9a8;
+  --bg: #000000;
+  --bg-elevated: #000000;
+  --page: #ffffff;
+  --ink: #f5f5f5;
+  --muted: #b3b3b3;
   --accent: #d7a46c;
-  --shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
-  --shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.35);
-  --radius: 20px;
-  --page-gap: 20px;
+  --radius: 0px;
+  --page-gap: 16px;
   --body-font: "Work Sans", sans-serif;
   --heading-font: "Libre Caslon Text", serif;
 }
@@ -22,7 +20,7 @@
 body {
   font-family: var(--body-font);
   color: var(--ink);
-  background: radial-gradient(circle at top, #2b241f 0%, var(--bg) 55%, #120f0d 100%);
+  background: var(--bg);
   min-height: 100vh;
 }
 
@@ -65,7 +63,7 @@ body {
 .control-btn,
 .control-link {
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   background: transparent;
   color: var(--ink);
   font-size: 0.85rem;
@@ -98,52 +96,40 @@ body {
 
 .book {
   position: relative;
-  background: var(--bg-elevated);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   overflow: hidden;
 }
 
 .page-shell {
-  --page-gap: 20px;
-  background: var(--page);
-  border-radius: calc(var(--radius) - 6px);
-  padding: 20px;
+  --page-gap: 16px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--page-gap);
-  align-items: center;
+  align-items: start;
   position: relative;
-  box-shadow: var(--shadow-soft);
 }
 
 .page-shell::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  left: calc(50% - 1px);
-  width: 2px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
-  pointer-events: none;
+  display: none;
 }
 
 .page-shell.single {
   grid-template-columns: 1fr;
 }
 
-.page-shell.single::before {
-  display: none;
-}
-
 canvas {
   width: 100%;
   height: auto;
   display: block;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 canvas.is-hidden {
@@ -163,7 +149,7 @@ canvas.is-empty {
   font-size: 1rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  background: rgba(12, 10, 8, 0.6);
+  background: rgba(0, 0, 0, 0.75);
   color: var(--ink);
   opacity: 0;
   pointer-events: none;
@@ -184,10 +170,6 @@ canvas.is-empty {
 @media (max-width: 900px) {
   .page-shell {
     grid-template-columns: 1fr;
-  }
-
-  .page-shell::before {
-    display: none;
   }
 }
 
